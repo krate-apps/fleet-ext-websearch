@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "extensionId": "org.fleet.websearch",
+  "pages": [
+    {
+      "id": "search",
+      "title": "Web Search",
+      "route": "/ext/org.fleet.websearch/search"
+    }
+  ],
+  "actions": [
+    {
+      "id": "reset-defaults",
+      "label": "Reset packaged engines (keep non-colliding user engines)",
+      "target": "global",
+      "danger": true
+    }
+  ],
+  "panels": [
+    {
+      "id": "extsearch-settings",
+      "title": "Web Search",
+      "placement": "settings"
+    }
+  ],
+  "forms": [
+    {
+      "id": "extsearch-search",
+      "title": "Search torrent sites",
+      "fields": [
+        {
+          "name": "query",
+          "label": "Query",
+          "kind": "text",
+          "required": true
+        },
+        {
+          "name": "engine",
+          "label": "Engine name (empty = all packaged + user)",
+          "kind": "text"
+        },
+        {
+          "name": "gatewayId",
+          "label": "Intake gatewayId (optional; empty = default client)",
+          "kind": "text"
+        },
+        {
+          "name": "label",
+          "label": "Label after enqueue (magnet infohash when known)",
+          "kind": "text"
+        },
+        {
+          "name": "sortBy",
+          "label": "Sort (engine|size|size-asc|title)",
+          "kind": "text"
+        },
+        {
+          "name": "filterKind",
+          "label": "Filter kind (magnet|torrent|empty)",
+          "kind": "text"
+        },
+        {
+          "name": "add",
+          "label": "Enqueue found magnets / .torrent links",
+          "kind": "boolean"
+        },
+        {
+          "name": "dryRun",
+          "label": "Dry-run enqueue (preview notice only)",
+          "kind": "boolean",
+          "help": "When Add is checked, dry-run shows what would be enqueued without calling intake."
+        }
+      ],
+      "description": "Search packaged engines and optionally add results to a client."
+    },
+    {
+      "id": "extsearch-settings",
+      "title": "User engines + defaults",
+      "fields": [
+        {
+          "name": "enginesText",
+          "label": "User engines",
+          "kind": "textarea",
+          "help": "One per line: Name|URL with {query}|minIntervalMs. Packaged Nyaa/SolidTorrents/TorrentsCSV are built-in read-only.",
+          "rows": 8
+        },
+        {
+          "name": "gatewayId",
+          "label": "Default intake gatewayId",
+          "kind": "text"
+        },
+        {
+          "name": "label",
+          "label": "Default label on enqueue",
+          "kind": "text"
+        }
+      ],
+      "loadMethod": "ext.websearch.getSettings",
+      "submitMethod": "ext.websearch.saveSettings",
+      "description": "Search packaged engines and optionally add results to a client."
+    }
+  ]
+}

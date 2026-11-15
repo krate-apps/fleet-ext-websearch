@@ -1,0 +1,21 @@
+schema: 1
+id: org.fleet.websearch
+name: Web Search
+description: Search torrent sites with packaged or custom templates and enqueue results.
+version: 1.0.0
+api: ">=1.0.0 <2.0.0"
+engines:
+  - rtorrent
+capabilities:
+  - storage.read
+  - storage.write
+  - http.fetch
+  - torrents.add
+  - torrents.actions
+frontend:
+  type: declarative
+  entry: ui/extension.json
+backend:
+  type: process
+  executable: bin/websearch-worker
+  protocol: jsonrpc-2
